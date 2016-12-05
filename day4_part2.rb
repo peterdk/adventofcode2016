@@ -46,7 +46,7 @@ class Processor
 
     lines.split("\n").each do |i|
       r = Room.new(i.strip)
-      decrypted = r.decrypt
+      decrypted = r.decrypt      
       if (decrypted.include?("north"))
         puts decrypted
         puts "sector:#{r.sector}"
