@@ -3,6 +3,9 @@ def process(input)
   puts input.split("\n").map{|l|l.strip.chars.to_a}.transpose.map{|l|l.group_by{|c|c}.map{|k,v|[k,v.count]}.sort_by{|p|p[1]}.reverse}.map{|i|i[0][0]}.join
 end
 
+def process_simpler(input)
+  puts input.split("\n").map{|l|l.strip.chars.to_a}.transpose.map{|l|l.max_by{|i|l.count(i)}}.join
+end
 
 test = "eedadn
 drvtee
@@ -23,7 +26,7 @@ enarar"
 
 
 process(test)
-
+process_simpler(test)
 input ="ewqplnag
 qchqvvsf
 jdhaqbeu
@@ -624,3 +627,4 @@ aqwtipsw
 pmympjrh"
 
 process(input)
+process_simpler(input)
