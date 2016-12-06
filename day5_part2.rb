@@ -12,11 +12,11 @@ def generate(door_id)
     md5 = Digest::MD5.hexdigest(input)
     if (md5.start_with?(prefix))
       chars = md5.chars.to_a
-      position = chars[5].to_s
-      if (position.match(/[0-7]/))
-        if (pass[position.to_i] == "-")
+      position = chars[5].to_i(16)
+      if (position < 8)
+        if (pass[position] == "-")
           value = chars[6]
-          pass[position.to_i] = value
+          pass[position] = value
           found += 1
           puts pass.join
         end
