@@ -1,10 +1,12 @@
 
 
     def abas(input)
+      results = []
       (0..(input.length - 3)).each do |i|
         current = input[i..(i+2)]
-        yield current if (current[0] == current[2] && current[0] != current[1])
+        results << current if (current[0] == current[2] && current[0] != current[1])
       end
+      return results
     end
 
     def match(abas, babs)
@@ -14,10 +16,11 @@
 
     def valid(full_input)
       brackets = full_input.scan(/\[(\w+)/).flatten.compact
-      non_brackets = full_input.scan(/(^|\])(\w+)/).map{|l|l[1]}.flatten.compact    
+      non_brackets = full_input.scan(/(^|\])(\w+)/).map{|l|l[1]}.flatten.compact
 
       abas = non_brackets.map{|l|abas(l)}.flatten
       babs = brackets.map{|l|abas(l)}.flatten
+
       return (match(abas, babs))
     end
 
