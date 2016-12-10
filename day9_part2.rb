@@ -1,18 +1,18 @@
 def read(input)
-count = 0
-left = input
-start = left.index("(")
-if (!start || start < 0)
-  return left.length
-end
-count += start
-left = left[start..-1]
-amount, times = left.match(/\((\d+)x(\d+)\)/).captures
-ending = left.index(")")
-decompress = left[(ending+1)..(ending+amount.to_i)]
-count += ((times.to_i)* read(decompress))
-left = left[(ending+amount.to_i+1)..-1]
-count += read(left)
+  count = 0
+  left = input
+  start = left.index("(")
+  if (!start || start < 0)
+    return left.length
+  end
+  count += start
+  left = left[start..-1]
+  amount, times = left.match(/\((\d+)x(\d+)\)/).captures
+  ending = left.index(")")
+  decompress = left[(ending+1)..(ending+amount.to_i)]
+  count += ((times.to_i)* read(decompress))
+  left = left[(ending+amount.to_i+1)..-1]
+  count += read(left)
 end
 
 def process(items)
