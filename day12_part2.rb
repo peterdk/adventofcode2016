@@ -1,12 +1,12 @@
 
-$registers = {"a" => 0, "b" => 0, "c" => 1, "d" => 0}
+$registers = {:a => 0, :b => 0, :c => 1, :d => 0}
 
 class Instruction
 
   def initialize(type, value1, value2 = nil)
     @type = type
-    @value1 = value1
-    @value2 = value2
+    @value1 = value1.match(/[a-d]/) ? value1.to_sym : value1.to_i
+    @value2 = (value2.match(/[a-d]/) ? value2.to_sym : value2.to_i) if value2 != nil
     @register_values = $registers.keys
   end
 
@@ -26,11 +26,12 @@ class Instruction
   end
 
   def value(input)
-    if (@register_values.include?(input))
-      $registers[input]
-    else
-      input.to_i
-    end
+    case input
+      when Symbol
+        $registers[input]
+      else
+        input
+      end
   end
 
 end
@@ -49,7 +50,7 @@ lines.each do |instr|
   elsif(instr.match(/dec ([a-d])/))
     @instructions << Instruction.new(:dec, $1)
   elsif(instr.match(/jnz ([0-9a-d]+) (-*[0-9]+)/) )
-    @instructions << Instruction.new(:jnz, $1, $2.to_i)
+    @instructions << Instruction.new(:jnz, $1, $2)
   end
 end
 end
@@ -60,7 +61,7 @@ def process
     instr = @instructions[current_index]
     current_index += instr.process
   end
-  puts "Finished processing, value in 'a' => #{$registers['a']}"
+  puts "Finished processing, value in 'a' => #{$registers[:a]}"
 end
 
 end
