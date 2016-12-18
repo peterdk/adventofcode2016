@@ -10,7 +10,7 @@ def process(start, row_count)
        new_row[i] = trap
     end
     rows << new_row
-  end  
+  end
   puts rows.flatten.count{|r| !r}
 end
 

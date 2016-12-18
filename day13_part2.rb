@@ -45,7 +45,7 @@ def reach(x,y, current)
       next_iter << dup
       if (o[0] == x && o[1] == y)
         puts "reached #{x},#{y} in #{dup.count - 1} steps"
-        return
+        return  
       end
     end
 

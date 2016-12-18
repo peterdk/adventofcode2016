@@ -14,6 +14,7 @@ def generate(input, length)
   data = data[0...length]
   checksum = checksum(data)
   while (checksum.length % 2 == 0)
+    puts "checksum length: #{checksum.length}"
     checksum = checksum(checksum)
   end
   checksum.map{|c|c ? "1": "0"}.join
