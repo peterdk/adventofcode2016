@@ -215,7 +215,7 @@ def solve(routes)
         #puts r.to_s
         if (r.solved)
           puts "Finished moving to 4th floor in #{r.states.length - 1}"
-          # puts r.to_s
+          #  puts r.to_s
           return
         end
       end
@@ -268,7 +268,12 @@ def process_real
   rum = MicroChip.new("ruthenium")
   plm = MicroChip.new("plutonium")
 
-  f1 = Floor.new(0, [prg,prm])
+  elg = Generator.new("elerium")
+  elm = MicroChip.new("elerium")
+  dlg = Generator.new("dilithium")
+  dlm = MicroChip.new("dilithium")
+
+  f1 = Floor.new(0, [prg,prm, elg, elm, dlg, dlm])
   f2 = Floor.new(1, [cog, cug, rug, plg])
   f3 = Floor.new(2, [com,cum,rum,plm])
   f4 = Floor.new(3, [])
@@ -290,19 +295,25 @@ def test
   hg = Generator.new("hydrogen")
   lg = Generator.new("lithium")
 
-  f1 = Floor.new(0, [])
+  f1 = Floor.new(0, [hm,lm])
   f2 = Floor.new(1, [])
-  f3 = Floor.new(2, [hm,lm])
+  f3 = Floor.new(2, [])
   f4 = Floor.new(3, [lg,hg])
+
+
+  g1 = Floor.new(0, [lm,hm])
+  g2 = Floor.new(1, [])
+  g3 = Floor.new(2, [])
+  g4 = Floor.new(3, [hg,lg])
 
 
   #puts f1.safe
 
   a = Building.new(2,[f1,f2,f3,f4])
-  b = Building.new(2,[f1,f2,f3,f4])
+  b = Building.new(2,[g1,g2,g3,g4])
 
-#puts [a,b].uniq{|b|b.to_generic_s}.count
-
+puts [a,b].uniq{|b|b.to_generic_s}.count
+puts a.to_generic_s
 
   #
   # start = Building.new(2,[f1,f2,f3,f4])
@@ -313,22 +324,7 @@ def test
   # end
 end
 
-def test2
-  prg = Generator.new("promethium")
-  prm = MicroChip.new("promethium")
 
-  cog = Generator.new("cobalt")
-  cug = Generator.new("curium")
-  rug = Generator.new("ruthenium")
-  plg = Generator.new("plutonium")
-
-  com = MicroChip.new("cobalt")
-  cum = MicroChip.new("curium")
-  rum = MicroChip.new("ruthenium")
-  plm = MicroChip.new("plutonium")
-
-  Floor.new(0, )
-end
 # test
- process_debug
+# process_debug
  process_real
