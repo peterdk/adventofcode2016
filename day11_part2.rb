@@ -64,7 +64,7 @@ class Floor
     chips = @items.select{|i|i.class == MicroChip}
     return true if (generators.length == 0)
     chips_without_generators = chips.select{|c| !generators.any?{|g|g.compatible(c)}}
-    generators_without_chips = generators.select{|g| !chips.any?{|c|c.compatible(g)}}
+    #generators_without_chips = generators.select{|g| !chips.any?{|c|c.compatible(g)}}
     return (chips.length == 0 || (chips.length > 0 && chips_without_generators.length == 0 ))
   end
 
